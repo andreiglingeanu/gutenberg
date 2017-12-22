@@ -13,12 +13,25 @@ let i18n;
  * @param {Object} data Locale data configuration
  */
 export function setLocaleData( data ) {
-	i18n = new Jed( data );
+	i18n = new Jed( {
+		...(i18n ? i18n.options : {}),
+		...data
+	} );
 }
 
 /**
- * Returns the current Jed instance, initializing with a default configuration
- * if not already assigned.
+ * Resets the Jed instance.
+ *
+ * @see http://messageformat.github.io/Jed/
+ *
+ * @param {Object} data Locale data configuration
+ */
+export function resetLocaleData () {
+	i18n = new Jed( { '': {} });
+}
+
+/**
+ * Returns the current Jed instance.
  *
  * @return {Jed} Jed instance
  */
